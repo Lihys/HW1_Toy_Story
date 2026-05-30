@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.HW1_Toy_Story" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
+    <style name="Cell">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:visibility">invisible</item>
+
+    </style>
+
+    <style name="Theme.HW1_Toy_Story" parent="Base.Theme.HW1_Toy_Story" />
+</resources>
