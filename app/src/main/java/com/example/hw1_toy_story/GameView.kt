@@ -26,6 +26,8 @@ class GameView(
     private fun drawObstacle(model: GameModel) {
         if ( (model.obstacleRow in grid.indices) && (model.obstacleCol in grid[0].indices) )
             grid[model.obstacleRow][model.obstacleCol].apply {
+                scaleX = 1.1f
+                scaleY = 1.1f
                 setImageResource(model.obstacleDrawable)
                 visibility = ImageView.VISIBLE
             }
@@ -47,8 +49,8 @@ class GameView(
                 setImageResource(model.coinDrawable)
 
                 //editing the size
-                scaleX = 0.65f
-                scaleY = 0.65f
+                scaleX = 0.55f
+                scaleY = 0.55f
 
                 visibility = ImageView.VISIBLE
             }

@@ -7,6 +7,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -16,6 +17,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var gameLogic: GameLogic
     private lateinit var tiltSensor: TiltSensor
     private val model = GameModel()
+
+    private lateinit var textScore: TextView
+    private lateinit var textDistance: TextView
 
     private val handler = Handler(Looper.getMainLooper())//so it runs with delay
     private val DELTA_TIME = 600L//the loop
@@ -45,6 +49,9 @@ class MainActivity : AppCompatActivity() {
         //Init
         gameLogic = GameLogic(model)
         gameView  = GameView(grid, hearts)
+
+        textScore = findViewById(R.id.txt_score)
+        textDistance = findViewById(R.id.txt_distance)
 
         //--Buttons--
         //left moves left and right moves the player right
@@ -80,6 +87,11 @@ class MainActivity : AppCompatActivity() {
             if (!model.isGameOver){
 
                 gameLogic.gameStep()
+
+                // updating the score and distance
+                textScore.text = "Score: ${model.scored}"
+                textDistance.text = "Distance: ${model.distance}m"
+
                 //boom
                 if (model.hitObstacle) {
                     vibrate()

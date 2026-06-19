@@ -37,6 +37,9 @@ class GameLogic(private val model: GameModel) {
             }
         }
 
+        // add to the distance
+        model.distance += 5
+
         checkCrash()
         checkCoinCollect()
     }

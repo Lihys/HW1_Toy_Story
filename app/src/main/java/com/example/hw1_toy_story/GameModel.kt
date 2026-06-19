@@ -22,7 +22,8 @@ data class GameModel(
     var coinRow: Int = -1,
     var coinCol: Int = 0,
     var scored: Int = 0,
-    var coinDrawable: Int = R.drawable.coin
+    var coinDrawable: Int = R.drawable.coin,
 
+    var distance: Int = 0
 
 )
