@@ -32,13 +32,15 @@
 
     </LinearLayout>
 
-    <!-- GRID: 7 rows × 3 columns -->
+    <!-- GRID: 7 rows × 5 columns -->
     <LinearLayout android:id="@+id/row0"
         android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1" android:orientation="horizontal">
         <ImageView android:id="@+id/cell_0_0" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_0_1" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_0_2" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_0_3" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_0_4" style="@style/Cell"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/row1"
@@ -47,6 +49,8 @@
         <ImageView android:id="@+id/cell_1_0" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_1_1" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_1_2" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_1_3" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_1_4" style="@style/Cell"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/row2"
@@ -55,6 +59,8 @@
         <ImageView android:id="@+id/cell_2_0" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_2_1" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_2_2" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_2_3" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_2_4" style="@style/Cell"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/row3"
@@ -63,6 +69,8 @@
         <ImageView android:id="@+id/cell_3_0" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_3_1" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_3_2" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_3_3" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_3_4" style="@style/Cell"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/row4"
@@ -71,8 +79,9 @@
         <ImageView android:id="@+id/cell_4_0" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_4_1" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_4_2" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_4_3" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_4_4" style="@style/Cell"/>
     </LinearLayout>
-
 
     <LinearLayout android:id="@+id/row5"
         android:layout_width="match_parent" android:layout_height="0dp"
@@ -80,6 +89,8 @@
         <ImageView android:id="@+id/cell_5_0" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_5_1" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_5_2" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_5_3" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_5_4" style="@style/Cell"/>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/row6"
@@ -88,7 +99,13 @@
         <ImageView android:id="@+id/cell_6_0" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_6_1" style="@style/Cell"/>
         <ImageView android:id="@+id/cell_6_2" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_6_3" style="@style/Cell"/>
+        <ImageView android:id="@+id/cell_6_4" style="@style/Cell"/>
     </LinearLayout>
+
+
+
+
 
     <!-- BUTTONS -->
     <!--this is for adding rhe borders  -->

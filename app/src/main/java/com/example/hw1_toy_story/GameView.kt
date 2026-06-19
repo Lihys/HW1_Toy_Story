@@ -4,7 +4,7 @@ import android.widget.ImageView
 class GameView(
     private val grid: Array<Array<ImageView>>,
     private val hearts: Array<ImageView>,
-) {
+    ){
 
     //how we update the UI
     fun updateView(model: GameModel) {
@@ -15,15 +15,15 @@ class GameView(
     }
 
     private fun clearGrid() {
-        for (row in 0..6) {
-            for (col in 0..2){
+        for (row in grid.indices) {
+            for (col in grid[row].indices){
                 grid[row][col].visibility = ImageView.INVISIBLE
             }
         }
     }
 
     private fun drawObstacle(model: GameModel) {
-        if (model.obstacleRow in 0..6)
+        if ( (model.obstacleRow in grid.indices) && (model.obstacleCol in grid[0].indices) )
             grid[model.obstacleRow][model.obstacleCol].apply {
                 setImageResource(model.obstacleDrawable)
                 visibility = ImageView.VISIBLE
@@ -31,20 +31,17 @@ class GameView(
     }
 
     private fun drawPlayer(model: GameModel) {
-        /*grid[6][model.playerCol].apply {
+        grid[GameConfig.PLAYER_ROW][model.playerCol].apply {
+            scaleX = 1.1f
+            scaleY = 1.1f
             setImageResource(R.drawable.woody_player)
-            visibility = ImageView.VISIBLE*/
-        grid[6][model.playerCol].apply {
-        //scaleType = ImageView.ScaleType.FIT_CENTER
-        scaleX = 1.1f // making it bigger slightly
-        scaleY = 1.1f
-        setImageResource(R.drawable.woody_player)
-       visibility = ImageView.VISIBLE
+            visibility = ImageView.VISIBLE
         }
     }
 
     private fun updateHearts(model: GameModel) {
         when (model.lives) {
+            3 -> hearts.forEach { it.visibility = ImageView.VISIBLE }
             2 -> hearts[2].visibility = ImageView.INVISIBLE
             1 -> hearts[1].visibility = ImageView.INVISIBLE
             0 -> hearts[0].visibility = ImageView.INVISIBLE

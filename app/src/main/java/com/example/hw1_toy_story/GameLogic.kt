@@ -3,23 +3,25 @@ package com.example.hw1_toy_story
 class GameLogic(private val model: GameModel) {
 
     fun movePlayer(direction: Int) {
-        model.playerCol = (model.playerCol + direction).coerceIn(0, 2)
+        model.playerCol = (model.playerCol + direction).coerceIn(0, GameConfig.NUM_COLS - 1)
     }
 
     // like when we advance the obstacles. each step in the "animation" we create
     fun gameStep() {
         model.hitObstacle = false
         model.obstacleRow ++
-        if (model.obstacleRow > 6){
+
+        if (model.obstacleRow >= GameConfig.NUM_ROWS) {
             generateObstacle()
         }
+
         checkCrash()
     }
 
     // the player hits the obstacle
     private fun checkCrash() {
         //if both are in the same place
-        if ( (model.obstacleRow == 6) && (model.obstacleCol == model.playerCol) ) {
+        if ( (model.obstacleRow == GameConfig.PLAYER_ROW) && (model.obstacleCol == model.playerCol) ) {
             onCrash()
         }
     }
@@ -36,7 +38,7 @@ class GameLogic(private val model: GameModel) {
     // generating a random obstacle
     private fun generateObstacle() {
         model.obstacleRow = 0
-        model.obstacleCol = (0..2).random()
+        model.obstacleCol = (0 until GameConfig.NUM_COLS).random()
         model.obstacleDrawable = listOf(
             R.drawable.obstacle1,
             R.drawable.obstacle2,

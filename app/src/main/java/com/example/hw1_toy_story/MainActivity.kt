@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var gameView: GameView
     private lateinit var gameLogic: GameLogic
+    private lateinit var tiltSensor: TiltSensor
     private val model = GameModel()
 
     private val handler = Handler(Looper.getMainLooper())//so it runs with delay
@@ -24,11 +25,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //building the grid 3 cols and 7 rows
-        val grid = Array(7) { row ->
-            Array(3) { col ->
+        //building the grid
+        val grid = Array(GameConfig.NUM_ROWS) { row ->
+            Array(GameConfig.NUM_COLS) { col ->
                 val resId = resources.getIdentifier(
-                    // cells 1_2 etc
                     "cell_${row}_${col}", "id", packageName
                 )
                 findViewById<ImageView>(resId)
@@ -56,6 +56,19 @@ class MainActivity : AppCompatActivity() {
             gameLogic.movePlayer(1)
             gameView.updateView(model)
         }
+
+        tiltSensor = TiltSensor(
+            context = this,
+            movePlayerLeft = {
+                gameLogic.movePlayer(-1)
+                gameView.updateView(model)
+            },
+            movePlayerRight = {
+                gameLogic.movePlayer(1)
+                gameView.updateView(model)
+            }
+        )
+        tiltSensor.start()
 
         //start loop
         handler.postDelayed(gameLoop, DELTA_TIME)
@@ -102,8 +115,14 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        tiltSensor.start()
+    }
+
     override fun onPause() {
         super.onPause()
         handler.removeCallbacksAndMessages(null)
+        tiltSensor.stop()
     }
 }
