@@ -8,12 +8,21 @@ object GameConfig {
 }
 
 data class GameModel(
-    //the player starts in the middle column
-    var playerCol: Int = GameConfig.NUM_COLS / 2,
-    var obstacleRow: Int = 0,
-    var obstacleCol: Int = (0 until GameConfig.NUM_COLS).random(),
+    var playerCol: Int = GameConfig.NUM_COLS / 2, //starting in the middle column
     var lives: Int = 3,
     var isGameOver: Boolean = false,
+
+    // obstacles:
+    var obstacleRow: Int = 0,
+    var obstacleCol: Int = (0 until GameConfig.NUM_COLS).random(),
     var hitObstacle: Boolean = false,
-    var obstacleDrawable: Int = R.drawable.obstacle1
+    var obstacleDrawable: Int = R.drawable.obstacle1,
+
+    // coins:
+    var coinRow: Int = -1,
+    var coinCol: Int = 0,
+    var scored: Int = 0,
+    var coinDrawable: Int = R.drawable.coin
+
+
 )

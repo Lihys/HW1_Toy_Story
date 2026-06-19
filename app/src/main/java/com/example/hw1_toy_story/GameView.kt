@@ -9,8 +9,9 @@ class GameView(
     //how we update the UI
     fun updateView(model: GameModel) {
         clearGrid()
-        drawObstacle(model)
         drawPlayer(model)
+        drawCoin(model)
+        drawObstacle(model)
         updateHearts(model)
     }
 
@@ -36,6 +37,21 @@ class GameView(
             scaleY = 1.1f
             setImageResource(R.drawable.woody_player)
             visibility = ImageView.VISIBLE
+        }
+    }
+
+    private fun drawCoin(model: GameModel) {
+        if (model.coinRow in grid.indices && model.coinCol in grid[0].indices)
+        {
+            grid[model.coinRow][model.coinCol].apply {
+                setImageResource(model.coinDrawable)
+
+                //editing the size
+                scaleX = 0.65f
+                scaleY = 0.65f
+
+                visibility = ImageView.VISIBLE
+            }
         }
     }
 
