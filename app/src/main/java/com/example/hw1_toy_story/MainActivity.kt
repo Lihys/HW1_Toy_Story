@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private var mediaPlayer: android.media.MediaPlayer? = null
 
+    private lateinit var leaderboardManager: LeaderboardManager
     private lateinit var textScore: TextView
     private lateinit var textDistance: TextView
 
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         //Init
         gameLogic = GameLogic(model)
         gameView  = GameView(grid, hearts)
+        leaderboardManager = LeaderboardManager(this)
 
         textScore = findViewById(R.id.txt_score)
         textDistance = findViewById(R.id.txt_distance)
@@ -131,6 +133,13 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (model.isGameOver) {
+
+                    // save the final score to our leaderboard
+                    leaderboardManager.saveScore(
+                        score = model.scored,
+                        distance = model.distance,
+                        location = "Hardcoded for testing" // default
+                    )
 
                     Toast.makeText(
                         this@MainActivity,
