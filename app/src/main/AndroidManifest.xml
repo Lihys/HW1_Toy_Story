@@ -31,7 +31,11 @@
         <!-- Leaderboard Screen -->
         <activity android:name=".LeaderboardActivity" android:exported="false" />
 
+
+
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

@@ -7,7 +7,8 @@ import com.google.gson.reflect.TypeToken
 data class LeaderboardEntry(
     val score: Int,
     val distance: Int,
-    val location: String = "Unknown"
+    val mapX: Double = 0.0,
+    val mapY: Double = 0.0
 ) {
     // the total value deciding the highest rank (score+distance)
     val absoluteTotal: Int get() = score + distance
@@ -28,7 +29,7 @@ class LeaderboardManager(context: Context) {
     // saves a new total score
     fun saveScore(score: Int, distance: Int, location: String = "Unknown") {
         val currentEntries = getTopEntries().toMutableList()
-        currentEntries.add(LeaderboardEntry(score, distance, location))
+        currentEntries.add(LeaderboardEntry(score, distance))
 
         // only top 10 rows
         val topTen = currentEntries.sortedByDescending { it.absoluteTotal }.take(10)

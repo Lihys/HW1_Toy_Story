@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.google.gson)
+    implementation(libs.play.services.maps)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
