@@ -21,12 +21,12 @@ class LeaderboardActivity : AppCompatActivity() {
         val manager = LeaderboardManager(this)
         val topScores = manager.getTopEntries()
 
-        // Loop completely from 1 to 10 to ensure a stable, static look
+        // top 10
         for (i in 0 until 10) {
             val row = TableRow(this)
             row.setPadding(0, 6, 0, 6)
 
-            // 1. Rank Number column
+            // rank numbers
             val txtRank = TextView(this).apply {
                 text = "${i + 1}"
                 setTextColor(Color.parseColor("#1976D2"))
@@ -34,30 +34,42 @@ class LeaderboardActivity : AppCompatActivity() {
                 setPadding(4, 4, 4, 4)
             }
 
-            // Check if actual saved entry records exist for this loop step
-            val hasData = i < topScores.size
-            val entry = if (hasData) topScores[i] else null
+            // Check if we have saved record for this loop index
+            val hasData = (i < topScores.size)
+            val entry= if (hasData){
+                topScores[i]
+            }
+            else
+                {null}
 
-            // 2. Score text
+            // score col
             val txtScore = TextView(this).apply {
+                // default "-"
                 text = entry?.score?.toString() ?: "-"
+
                 setTextColor(Color.parseColor("#333333"))
                 gravity = Gravity.CENTER
                 textSize = 15f
             }
 
-            // 3. Distance text
+            // distance col
             val txtDistance = TextView(this).apply {
-                text = if (hasData) "${entry?.distance}m" else "-"
+                text = if (hasData){
+                    "${entry?.distance}m"
+                }
+                else {"-"}
+
                 setTextColor(Color.parseColor("#333333"))
+
                 gravity = Gravity.CENTER
                 textSize = 15f
             }
 
-            // 4. Location Column
-            val txtLocation = TextView(this).apply {
-                text = entry?.location ?: "-"
-                setTextColor(Color.parseColor("#666666"))
+            // total score col
+            val txtTotal = TextView(this).apply {
+                text = entry?.absoluteTotal?.toString() ?: "-"
+
+                setTextColor(Color.parseColor("#E53935"))
                 gravity = Gravity.CENTER
                 textSize = 15f
             }
@@ -65,13 +77,13 @@ class LeaderboardActivity : AppCompatActivity() {
             row.addView(txtRank)
             row.addView(txtScore)
             row.addView(txtDistance)
-            row.addView(txtLocation)
+            row.addView(txtTotal)
 
             tableLayout.addView(row)
         }
 
         btnBack.setOnClickListener {
-            finish() // Safely dismisses activity and reveals parent menu stack
+            finish()
         }
     }
 }

@@ -41,8 +41,7 @@
                     <TextView android:text="#" android:textStyle="bold" android:textColor="#555555" android:textSize="14sp" android:padding="4dp"/>
                     <TextView android:text="Score" android:textStyle="bold" android:textColor="#555555" android:textSize="14sp" android:gravity="center" android:padding="4dp"/>
                     <TextView android:text="Distance" android:textStyle="bold" android:textColor="#555555" android:textSize="14sp" android:gravity="center" android:padding="4dp"/>
-                    <TextView android:text="Location" android:textStyle="bold" android:textColor="#555555" android:textSize="14sp" android:gravity="center" android:padding="4dp"/>
-                </TableRow>
+                    <TextView android:text="Total" android:textStyle="bold" android:textColor="#555555" android:textSize="14sp" android:gravity="center" android:padding="4dp"/>                </TableRow>
 
             </TableLayout>
 
