@@ -1,5 +1,7 @@
 package com.example.hw1_toy_story
 
+//import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -142,6 +144,7 @@ class MainActivity : AppCompatActivity() {
                 //boom
                 if (model.hitObstacle) {
                     vibrate()
+                    playCrashSound() // RESTORED: Plays your sound effect instantly on hit!
                     if (model.lives > 0) {
                         Toast.makeText(
                             this@MainActivity,
@@ -191,6 +194,17 @@ class MainActivity : AppCompatActivity() {
         vibrator.vibrate(
             VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE)
         )
+    }
+
+    private fun playCrashSound() {
+        try {
+            val mediaPlayer = MediaPlayer.create(this, R.raw.crash_sound)
+            mediaPlayer.setOnCompletionListener { mp ->
+                mp.release() // Clean up resources when audio finishes playing
+            }
+            mediaPlayer.start()
+        } catch (e: Exception) {
+        }
     }
 
     override fun onResume() {
