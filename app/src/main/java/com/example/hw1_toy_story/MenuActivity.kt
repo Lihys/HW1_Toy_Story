@@ -23,12 +23,49 @@ class MenuActivity : AppCompatActivity() {
         val btnStart = findViewById<Button>(R.id.btn_start_game)
         val btnLeaderboard = findViewById<Button>(R.id.btn_leaderboard)
 
-        // we only show the hard/easy button when the user chooses the arrow mode
-        gameModeSelector.setOnCheckedChangeListener { _, checkedId ->
-            if (checkedId == R.id.radio_arrows) {
-                difficultyGroup.visibility = View.VISIBLE
-            } else {
-                difficultyGroup.visibility = View.GONE
+        val btnEasy = findViewById<com.google.android.material.button.MaterialButton>(R.id.btn_easy)
+        val btnHard = findViewById<com.google.android.material.button.MaterialButton>(R.id.btn_hard)
+
+        val radioTilt = findViewById<android.widget.RadioButton>(R.id.radio_tilt)
+        val radioArrows = findViewById<android.widget.RadioButton>(R.id.radio_arrows)
+
+        //  clear the other check when clicked
+        radioTilt.setOnClickListener {
+            radioArrows.isChecked = false
+        }
+
+        radioArrows.setOnClickListener {
+            radioTilt.isChecked = false
+        }
+
+        // to visually show the toggle is pressed / unpressed:
+        fun updateToggleVisuals(checkedId: Int) {
+            if (checkedId == R.id.btn_easy) {
+                // Easy is selected:
+                btnEasy.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#1E88E5"))
+                btnEasy.setTextColor(android.graphics.Color.WHITE)
+
+                // Hard is unselected:
+                btnHard.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FFFDF5"))
+                btnHard.setTextColor(android.graphics.Color.parseColor("#E53935"))
+            } else if (checkedId == R.id.btn_hard) {
+                // Hard is selected:
+                btnHard.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#E53935"))
+                btnHard.setTextColor(android.graphics.Color.WHITE)
+
+                // Easy is unselected:
+                btnEasy.backgroundTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FFFDF5"))
+                btnEasy.setTextColor(android.graphics.Color.parseColor("#1E88E5"))
+            }
+        }
+
+// Color them correctly right when the screen opens up
+        updateToggleVisuals(difficultyGroup.checkedButtonId)
+
+// Listen for clicks to instantly update the pressed/unpressed states dynamically
+        difficultyGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                updateToggleVisuals(checkedId)
             }
         }
 

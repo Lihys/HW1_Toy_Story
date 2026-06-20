@@ -73,7 +73,6 @@
                         android:textSize="15sp"
                         app:buttonTint="#1976D2" />
 
-                    <!-- Invisible spacer  -->
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1dp"
@@ -87,23 +86,18 @@
                         app:selectionRequired="true"
                         app:singleSelection="true">
 
-                        <!-- EASY -->
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_easy"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="36dp"
+                            android:layout_height="40dp"
                             android:insetTop="0dp"
                             android:insetBottom="0dp"
                             android:text="Easy"
                             android:textAllCaps="false"
                             android:textSize="13sp"
+                            app:strokeColor="#1E88E5" />
 
-                            app:backgroundTint="@color/white"
-                            app:strokeColor="#E0E0E0"
-                            android:textColor="#1E88E5"/>
-
-                        <!-- HARD -->
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_hard"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -114,10 +108,7 @@
                             android:text="Hard"
                             android:textAllCaps="false"
                             android:textSize="13sp"
-
-                            app:backgroundTint="@color/white"
-                            app:strokeColor="#E0E0E0"
-                            android:textColor="#E53935"/>
+                            app:strokeColor="#E53935" />
 
                     </com.google.android.material.button.MaterialButtonToggleGroup>
 
