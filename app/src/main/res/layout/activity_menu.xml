@@ -12,7 +12,7 @@
         android:layout_margin="32dp"
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
-        app:cardBackgroundColor="#F2FFFFFF">
+        app:cardBackgroundColor="#FFFDF5">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:text="NEW GAME"
-                android:textColor="#013D7B"
+                android:textColor="#2196F3"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
@@ -50,29 +50,78 @@
                     android:id="@+id/radio_tilt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:buttonTint="#000000"
                     android:checked="true"
                     android:padding="6dp"
                     android:text="Tilt Mode"
-                    android:textSize="15sp" />
+                    android:textColor="#333333"
+                    android:textSize="15sp"
+                    app:buttonTint="#1976D2" />
 
-                <RadioButton
-                    android:id="@+id/radio_arrows_easy"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:buttonTint="#000000"
-                    android:padding="6dp"
-                    android:text="Arrows - Easy Mode"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
-                <RadioButton
-                    android:id="@+id/radio_arrows_hard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:buttonTint="#000000"
-                    android:padding="6dp"
-                    android:text="Arrows - Hard Mode"
-                    android:textSize="15sp" />
+                    <RadioButton
+                        android:id="@+id/radio_arrows"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+                        android:text="Arrow Mode"
+                        android:textColor="#333333"
+                        android:textSize="15sp"
+                        app:buttonTint="#1976D2" />
+
+                    <!-- Invisible spacer  -->
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/difficulty_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:checkedButton="@id/btn_easy"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <!-- EASY -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_easy"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="Easy"
+                            android:textAllCaps="false"
+                            android:textSize="13sp"
+
+                            app:backgroundTint="@color/white"
+                            app:strokeColor="#E0E0E0"
+                            android:textColor="#1E88E5"/>
+
+                        <!-- HARD -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_hard"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="Hard"
+                            android:textAllCaps="false"
+                            android:textSize="13sp"
+
+                            app:backgroundTint="@color/white"
+                            app:strokeColor="#E0E0E0"
+                            android:textColor="#E53935"/>
+
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                </LinearLayout>
             </RadioGroup>
 
             <Button
@@ -80,25 +129,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="8dp"
-                app:backgroundTint="#F9D445"
                 android:text="START GAME"
-                android:textColor="#C52330"
+                android:textColor="#0D47A1"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                app:backgroundTint="#FFD54F"
                 app:cornerRadius="10dp" />
 
             <Button
                 android:id="@+id/btn_leaderboard"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
+                android:layout_height="48dp"
                 android:text=" See Leaderboard"
-                android:textColor="#013D7B"
+                android:textColor="#1976D2"
                 android:textSize="15sp"
                 app:icon="@drawable/trophy"
                 app:iconGravity="textStart"
                 app:iconPadding="6dp"
-                app:iconTint="#013D7B" />
+                app:iconTint="#1976D2"
+                app:rippleColor="#201976D2" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
