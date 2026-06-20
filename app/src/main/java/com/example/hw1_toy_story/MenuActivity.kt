@@ -103,8 +103,8 @@ class MenuActivity : AppCompatActivity() {
         }
 
         btnLeaderboard.setOnClickListener {
-            // to change :
-            Toast.makeText(this, "Leaderboard screen coming soon!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, LeaderboardActivity::class.java)
+            startActivity(intent)
         }
     }
 }

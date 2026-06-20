@@ -27,7 +27,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        </application>
+
+        <!-- Leaderboard Screen -->
+        <activity android:name=".LeaderboardActivity" android:exported="false" />
+
+    </application>
 
     <uses-permission android:name="android.permission.VIBRATE"/>
 </manifest>
