@@ -18,9 +18,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tiltSensor: TiltSensor
     private val model = GameModel()
 
-    private var mediaPlayer: android.media.MediaPlayer? = null
-
-    private lateinit var leaderboardManager: LeaderboardManager
     private lateinit var textScore: TextView
     private lateinit var textDistance: TextView
 
@@ -28,10 +25,36 @@ class MainActivity : AppCompatActivity() {
     private var deltaTime = 600L//the loop
     private var useTiltMode = false
 
+    // location
+    private lateinit var leaderboardManager: LeaderboardManager
+    private lateinit var fusedLocationClient: com.google.android.gms.location.FusedLocationProviderClient
+    private var liveMapX = 0.0
+    private var liveMapY = 0.0
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Init managers
+        leaderboardManager = LeaderboardManager(this)
+        fusedLocationClient = com.google.android.gms.location.LocationServices.getFusedLocationProviderClient(this)
+
+        // request GPS permissions
+        val locationPermissionRequest = registerForActivityResult(
+            androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            if (permissions.getOrDefault(android.Manifest.permission.ACCESS_FINE_LOCATION, false) ||
+                permissions.getOrDefault(android.Manifest.permission.ACCESS_COARSE_LOCATION, false)) {
+
+                fetchLiveLocation()
+            }
+        }
+
+        locationPermissionRequest.launch(arrayOf(
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION
+        ))
 
         // the user's choices from the menu -
         useTiltMode = intent.getBooleanExtra("USE_TILT", false)
@@ -57,7 +80,6 @@ class MainActivity : AppCompatActivity() {
         //Init
         gameLogic = GameLogic(model)
         gameView  = GameView(grid, hearts)
-        leaderboardManager = LeaderboardManager(this)
 
         textScore = findViewById(R.id.txt_score)
         textDistance = findViewById(R.id.txt_distance)
@@ -119,10 +141,7 @@ class MainActivity : AppCompatActivity() {
 
                 //boom
                 if (model.hitObstacle) {
-
                     vibrate()
-                    playCrashSound()
-
                     if (model.lives > 0) {
                         Toast.makeText(
                             this@MainActivity,
@@ -133,12 +152,12 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if (model.isGameOver) {
-
-                    // save the final score to our leaderboard
+                    // when the game is over we save the score locally
                     leaderboardManager.saveScore(
                         score = model.scored,
                         distance = model.distance,
-                        location = "Hardcoded for testing" // default
+                        mapX = liveMapX,
+                        mapY = liveMapY
                     )
 
                     Toast.makeText(
@@ -146,7 +165,6 @@ class MainActivity : AppCompatActivity() {
                         "GAME OVER!",
                         Toast.LENGTH_LONG
                     ).show()
-
                 }
 
                 gameView.updateView(model)
@@ -155,19 +173,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun fetchLiveLocation() {
+        try {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: android.location.Location? ->
+                if (location != null) {
+                    liveMapX = location.longitude
+                    liveMapY = location.latitude
+                }
+            }
+        } catch (e: SecurityException) {
+            // because i had a problem here
+        }
+    }
+
     private fun vibrate() {
         val vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
         vibrator.vibrate(
             VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE)
         )
-    }
-
-    private fun playCrashSound() {
-        // if there's already an audio, release it, make it stop
-        mediaPlayer?.release()
-
-        mediaPlayer = android.media.MediaPlayer.create(this, R.raw.crash_sound)
-        mediaPlayer?.start()
     }
 
     override fun onResume() {
@@ -181,10 +204,6 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         handler.removeCallbacksAndMessages(null)
-
-        mediaPlayer?.release()
-        mediaPlayer = null
-
         if (useTiltMode)
         {
             tiltSensor.stop()

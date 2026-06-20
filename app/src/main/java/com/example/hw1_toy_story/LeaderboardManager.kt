@@ -27,11 +27,10 @@ class LeaderboardManager(context: Context) {
     }
 
     // saves a new total score
-    fun saveScore(score: Int, distance: Int, location: String = "Unknown") {
+    fun saveScore(score: Int, distance: Int, mapX: Double = 0.0, mapY: Double = 0.0) {
         val currentEntries = getTopEntries().toMutableList()
-        currentEntries.add(LeaderboardEntry(score, distance))
+        currentEntries.add(LeaderboardEntry(score, distance, mapX, mapY))
 
-        // only top 10 rows
         val topTen = currentEntries.sortedByDescending { it.absoluteTotal }.take(10)
 
         prefs.edit().putString("leaderboard_data", gson.toJson(topTen)).apply()
