@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
             btnLeft.visibility = android.view.View.GONE
             btnRight.visibility = android.view.View.GONE
 
-            // Only initialize the hardware sensor if we actually need it
+            //only initialize the sensor if we actually need it
             tiltSensor = TiltSensor(
                 context = this,
                 movePlayerLeft = {
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
                 //boom
                 if (model.hitObstacle) {
                     vibrate()
-                    playCrashSound() // RESTORED: Plays your sound effect instantly on hit!
+                    playCrashSound() 
                     if (model.lives > 0) {
                         Toast.makeText(
                             this@MainActivity,
@@ -200,7 +200,7 @@ class MainActivity : AppCompatActivity() {
         try {
             val mediaPlayer = MediaPlayer.create(this, R.raw.crash_sound)
             mediaPlayer.setOnCompletionListener { mp ->
-                mp.release() // Clean up resources when audio finishes playing
+                mp.release() 
             }
             mediaPlayer.start()
         } catch (e: Exception) {
